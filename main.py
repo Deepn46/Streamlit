@@ -9,4 +9,9 @@ url='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid
 # Reading csv file
 
 df=pd.read_csv(url)
-st.table(df.head())
+
+#Un-pivoting datas 
+
+df1=df.melt(id_vars=['Country/Region','Province/State','Lat','Long'],var_name='Date',value_name='Running total')  
+
+

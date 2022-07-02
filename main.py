@@ -51,5 +51,8 @@ if page_selected=='Cases':
     fig = px.line(df2[df2['Country/Region']==selected_country],x = 'Date',y = 'Daily_cases',)
     st.plotly_chart(fig)
 
+#Cases page creation
+if page_selected=='Deaths':
+
 
 

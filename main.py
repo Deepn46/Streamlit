@@ -32,10 +32,11 @@ if page_selected=='Demo':
 
 #Cases page creation
 if page_selected=='Cases':
+    st.image('https://images.thequint.com/thequint%2F2022-06%2F9f59066e-637a-4bd7-a45c-0d064706fead%2FUntitled_design__78_.png?auto=format%2Ccompress&fmt=webp&width=720')
     st.header('Cases')
     selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
     st.write('Total cases in ',selected_country,' is')
-    st.subheader(int(df1[df1['Country/Region']=='India']['Running total'].tail(1)))
+    st.subheader(int(df1[df1['Country/Region']==selected_country]['Running total'].tail(1)))
     # Created new DataFrame inorder to calculate the dail cases count
     df2=df1[df1['Country/Region']==selected_country]
     # Created a list and stored the running total values
@@ -54,16 +55,16 @@ if page_selected=='Cases':
     st.table(df2[['Country/Region','Date','Daily_cases']].tail().reset_index())
     
 
-#Cases page creation
+#Deaths page creation
 if page_selected=='Deaths':
     st.image('https://i0.wp.com/www.opindia.com/wp-content/uploads/2021/04/Covid-19-deaths-10x-times-claims-Untitled-1.jpg?w=700&ssl=1', width=800)
 
     #st.header('Deaths')
     df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
-    death_df=df_d.melt(id_vars=['Province/State','Country/Region','Lat','Long'],var_name='Date',value_name='Cummulative')
-    selected_country=st.selectbox('Select Country',list(death_df['Country/Region'].unique()))
+    recovered_df=df_d.melt(id_vars=['Province/State','Country/Region','Lat','Long'],var_name='Date',value_name='Cummulative')
+    selected_country=st.selectbox('Select Country',list(recovered_df['Country/Region'].unique()))
 
-    country_df=death_df[death_df['Country/Region']==selected_country]
+    country_df=recovered_df[recovered_df['Country/Region']==selected_country]
     nl=list(country_df['Cummulative'])
     nl.pop()
     nl.insert(0,0)
@@ -82,6 +83,34 @@ if page_selected=='Deaths':
     st.write('The below table shows the last five days death cases ')
 
     st.table(country_df[['Country/Region','Date','Daily_Death']].tail().reset_index())
+
+#Deaths page creation
+if page_selected=='Recovered':
+    st.header('Recovered')
+    df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
+    recovered_df=df_d.melt(id_vars=['Province/State','Country/Region','Lat','Long'],var_name='Date',value_name='Cummulative')
+    selected_country=st.selectbox('Select Country',list(recovered_df['Country/Region'].unique()))
+
+    country_df=recovered_df[recovered_df['Country/Region']==selected_country]
+    nl=list(country_df['Cummulative'])
+    nl.pop()
+    nl.insert(0,0)
+    country_df['Dummy']=nl
+    
+    country_df['Daily_recovered']=country_df['Cummulative']-country_df['Dummy']
+
+    
+    st.write('Total recovered in ',selected_country,' is')
+    
+    st.subheader(int(country_df[country_df['Country/Region']==selected_country]['Cummulative'].tail(1)))
+    
+    fig = px.line(country_df,x = 'Date',y = 'Daily_recovered')
+    st.plotly_chart(fig)
+
+    st.write('The below table shows the last five days death cases ')
+
+    st.table(country_df[['Country/Region','Date','Daily_recovered']].tail().reset_index())   
+
 
 
 

@@ -52,7 +52,8 @@ if page_selected=='Cases':
     st.plotly_chart(fig)
 
 #Cases page creation
-if page_selected=='Deaths':
+#if page_selected=='Deaths':
+
 
 
 

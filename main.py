@@ -28,7 +28,7 @@ if page_selected=='Demo':
     st.write('Total cases till today in ',selected_country,' is')
     df1[df1['Country/Region']=='India'][['Date','Running total']].tail(1)
     st.subheader(int(df1[df1['Country/Region']=='India']['Running total'].tail(1)))
-    st.table(df1[df1['Country/Region']==selected_country].tail(1).reset_index())
+   # st.table(df1[df1['Country/Region']==selected_country].tail(1).reset_index())
 
 #Cases page creation
 if page_selected=='Cases':
@@ -57,7 +57,7 @@ if page_selected=='Cases':
 
 #Deaths page creation
 if page_selected=='Deaths':
-    st.image('https://i0.wp.com/www.opindia.com/wp-content/uploads/2021/04/Covid-19-deaths-10x-times-claims-Untitled-1.jpg?w=700&ssl=1', width=800)
+    st.image('https://i0.wp.com/www.opindia.com/wp-content/uploads/2021/04/Covid-19-deaths-10x-times-claims-Untitled-1.jpg?w=700&ssl=1', width=500)
 
     #st.header('Deaths')
     df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
@@ -84,7 +84,7 @@ if page_selected=='Deaths':
 
     st.table(country_df[['Country/Region','Date','Daily_Death']].tail().reset_index())
 
-#Deaths page creation
+#Recovered page creation
 if page_selected=='Recovered':
     st.header('Recovered')
     df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')

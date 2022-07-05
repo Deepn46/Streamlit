@@ -31,7 +31,7 @@ if page_selected=='Demo':
         date=i
     col1,col2= st.columns(2)
     with col1:
-        st.write('Total cases in {} is'.format(selected_country))
+        st.markdown('Total cases in **{}** is'.format(selected_country))
     with col2:
         st.write('Updated till ')
 
@@ -45,8 +45,7 @@ if page_selected=='Demo':
 #Cases page creation
 if page_selected=='Cases':
     st.header('Cases')
-    #selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
-    st.write('Total cases in ',selected_country,' is')
+    st.markdown('Total cases in **{}** is'.format(selected_country))
     st.subheader(int(df1[df1['Country/Region']==selected_country]['Running total'].tail(1)))
     # Created new DataFrame inorder to calculate the dail cases count
     df2=df1[df1['Country/Region']==selected_country]
@@ -84,7 +83,7 @@ if page_selected=='Deaths':
     country_df['Daily_Death']=country_df['Cummulative']-country_df['Dummy']
 
     
-    st.write('Total death in ',selected_country,' is')
+    st.markdown('Total death in **{}** is'.format(selected_country))
     
     st.subheader(int(country_df[country_df['Country/Region']==selected_country]['Cummulative'].tail(1)))
     

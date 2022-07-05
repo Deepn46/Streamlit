@@ -32,7 +32,7 @@ if page_selected=='Demo':
 
 #Cases page creation
 if page_selected=='Cases':
-    st.image('https://images.thequint.com/thequint%2F2022-06%2F9f59066e-637a-4bd7-a45c-0d064706fead%2FUntitled_design__78_.png?auto=format%2Ccompress&fmt=webp&width=720')
+    #st.image('https://images.thequint.com/thequint%2F2022-06%2F9f59066e-637a-4bd7-a45c-0d064706fead%2FUntitled_design__78_.png?auto=format%2Ccompress&fmt=webp&width=720')
     st.header('Cases')
     selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
     st.write('Total cases in ',selected_country,' is')

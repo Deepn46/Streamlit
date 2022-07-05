@@ -17,15 +17,16 @@ df=pd.read_csv(url)
 df1=df.melt(id_vars=['Country/Region','Province/State','Lat','Long'],var_name='Date',value_name='Running total')  
 
 page_selected=st.sidebar.radio('Select Page',['Demo','Cases','Deaths'])       #'Recovered'
+selected_country=st.sidebar.selectbox('Select Country',list(df1['Country/Region'].unique()))
+date_series= df1[df1['Country/Region']==selected_country]['Date'].tail(1)
+for i in date_series:
+    date=i
+st.sidebar.write('Update on : ',date)
 
 #Demo page creation
 if page_selected=='Demo':
-    st.image('https://www.sisecam.com.tr/tr/PublishingImages/sisecam-covid-19-bilgilendirme-detay.jpg', width=800)
-    st.header('Covid19')
-    st.text('Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.')
     st.subheader('Daily cases')
-    selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
-    date_series= df1[df1['Country/Region']=='India']['Date'].tail(1)
+    date_series= df1[df1['Country/Region']==selected_country]['Date'].tail(1)
     for i in date_series:
         date=i
     col1,col2= st.columns(2)
@@ -44,7 +45,7 @@ if page_selected=='Demo':
 #Cases page creation
 if page_selected=='Cases':
     st.header('Cases')
-    selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
+    #selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
     st.write('Total cases in ',selected_country,' is')
     st.subheader(int(df1[df1['Country/Region']==selected_country]['Running total'].tail(1)))
     # Created new DataFrame inorder to calculate the dail cases count
@@ -73,7 +74,7 @@ if page_selected=='Deaths':
     st.header('Deaths')
     df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
     recovered_df=df_d.melt(id_vars=['Province/State','Country/Region','Lat','Long'],var_name='Date',value_name='Cummulative')
-    selected_country=st.selectbox('Select Country',list(recovered_df['Country/Region'].unique()))
+    #selected_country=st.selectbox('Select Country',list(recovered_df['Country/Region'].unique()))
 
     country_df=recovered_df[recovered_df['Country/Region']==selected_country]
     nl=list(country_df['Cummulative'])

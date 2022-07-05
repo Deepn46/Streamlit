@@ -27,7 +27,7 @@ if page_selected=='Demo':
     selected_country=st.selectbox('Select Country',list(df1['Country/Region'].unique()))
     st.write('Total cases till today in ',selected_country,' is')
     df1[df1['Country/Region']=='India'][['Date','Running total']].tail(1)
-    st.subheader(int(df1[df1['Country/Region']=='India']['Running total'].tail(1)))
+    st.subheader(int(df1[df1['Country/Region']==selected_country]['Running total'].tail(1)))
    # st.table(df1[df1['Country/Region']==selected_country].tail(1).reset_index())
 
 #Cases page creation

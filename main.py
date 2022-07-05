@@ -57,7 +57,7 @@ if page_selected=='Cases':
 
 #Deaths page creation
 if page_selected=='Deaths':
-    st.image('https://i0.wp.com/www.opindia.com/wp-content/uploads/2021/04/Covid-19-deaths-10x-times-claims-Untitled-1.jpg?w=700&ssl=1', width=500)
+    # st.image('https://i0.wp.com/www.opindia.com/wp-content/uploads/2021/04/Covid-19-deaths-10x-times-claims-Untitled-1.jpg?w=700&ssl=1', width=500)
 
     #st.header('Deaths')
     df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')

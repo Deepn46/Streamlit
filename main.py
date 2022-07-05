@@ -78,6 +78,7 @@ if page_selected=='Deaths':
     st.subheader(int(country_df[country_df['Country/Region']==selected_country]['Cummulative'].tail(1)))
     
     fig = px.line(country_df,x = 'Date',y = 'Daily_Death')
+    fig.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
     st.plotly_chart(fig)
 
     st.write('The below table shows the last five days death cases ')

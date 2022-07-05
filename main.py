@@ -16,7 +16,7 @@ df=pd.read_csv(url)
 
 df1=df.melt(id_vars=['Country/Region','Province/State','Lat','Long'],var_name='Date',value_name='Running total')  
 
-page_selected=st.sidebar.radio('Select Page',['Demo','Cases','Deaths','Recovered'])
+page_selected=st.sidebar.radio('Select Page',['Demo','Cases','Deaths'])       #'Recovered'
 
 #Demo page creation
 if page_selected=='Demo':
@@ -85,31 +85,31 @@ if page_selected=='Deaths':
     st.table(country_df[['Country/Region','Date','Daily_Death']].tail().reset_index())
 
 #Recovered page creation
-if page_selected=='Recovered':
-    st.header('Recovered')
-    df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
-    recovered_df=df_d.melt(id_vars=['Province/State','Country/Region','Lat','Long'],var_name='Date',value_name='Cummulative')
-    selected_country=st.selectbox('Select Country',list(recovered_df['Country/Region'].unique()))
+#if page_selected=='Recovered':
+#    st.header('Recovered')
+#    df_d=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
+#    recovered_df=df_d.melt(id_vars=['Province/State','Country/Region','Lat','Long'],var_name='Date',value_name='Cummulative')
+#    selected_country=st.selectbox('Select Country',list(recovered_df['Country/Region'].unique()))
 
-    country_df=recovered_df[recovered_df['Country/Region']==selected_country]
-    nl=list(country_df['Cummulative'])
-    nl.pop()
-    nl.insert(0,0)
-    country_df['Dummy']=nl
+#    country_df=recovered_df[recovered_df['Country/Region']==selected_country]
+#    nl=list(country_df['Cummulative'])
+#    nl.pop()
+#    nl.insert(0,0)
+#    country_df['Dummy']=nl
     
-    country_df['Daily_recovered']=country_df['Cummulative']-country_df['Dummy']
+#    country_df['Daily_recovered']=country_df['Cummulative']-country_df['Dummy']
 
     
-    st.write('Total recovered in ',selected_country,' is')
+#    st.write('Total recovered in ',selected_country,' is')
     
-    st.subheader(int(country_df[country_df['Country/Region']==selected_country]['Cummulative'].tail(1)))
+#    st.subheader(int(country_df[country_df['Country/Region']==selected_country]['Cummulative'].tail(1)))
     
-    fig = px.line(country_df,x = 'Date',y = 'Daily_recovered')
-    st.plotly_chart(fig)
+#    fig = px.line(country_df,x = 'Date',y = 'Daily_recovered')
+#    st.plotly_chart(fig)
 
-    st.write('The below table shows the last five days death cases ')
+#    st.write('The below table shows the last five days death cases ')
 
-    st.table(country_df[['Country/Region','Date','Daily_recovered']].tail().reset_index())   
+#    st.table(country_df[['Country/Region','Date','Daily_recovered']].tail().reset_index())   
 
 
 

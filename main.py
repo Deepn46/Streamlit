@@ -50,6 +50,7 @@ if page_selected=='Cases':
     # Calculation for to find the daiy count and updated that calculated value as a column in df2
     df2['Daily_cases']=df2['Running total']-df2['new_value']
     fig = px.line(df2[df2['Country/Region']==selected_country],x = 'Date',y = 'Daily_cases',)
+    fig.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
     st.plotly_chart(fig)
     st.write('Below table shows the last five days cases ')
     st.table(df2[['Country/Region','Date','Daily_cases']].tail().reset_index())

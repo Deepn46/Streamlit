@@ -28,14 +28,19 @@ if page_selected=='Demo':
     date_series= df1[df1['Country/Region']=='India']['Date'].tail(1)
     for i in date_series:
         date=i
-    bold_date=i
-    st.write('Total cases {} today in {} is'.format(bold_date,selected_country))
+    col1,col2= st.columns(2)
+    with col1:
+        st.write('Total cases in {} is'.format(selected_country))
+    with col2:
+        st.write('Updated till ')
 
-    #st.write('Total cases till today in ',selected_country,' is')
-  
-    st.subheader(int(df1[df1['Country/Region']==selected_country]['Running total'].tail(1)))
-   # st.table(df1[df1['Country/Region']==selected_country].tail(1).reset_index())
+    col1,col2= st.columns(2)
+    with col1:
+        st.subheader(int(df1[df1['Country/Region']==selected_country]['Running total'].tail(1)))
+    with col2:
+        st.subheader(date) 
 
+   
 #Cases page creation
 if page_selected=='Cases':
     st.header('Cases')
@@ -58,8 +63,10 @@ if page_selected=='Cases':
     fig.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
     st.plotly_chart(fig)
     st.write('Below table shows the last five days cases ')
-    st.table(df2[['Country/Region','Date','Daily_cases']].tail().reset_index())
-    
+    df3= df2[['Country/Region','Date','Daily_cases']].tail()
+    df3=df3.reset_index()
+    st.table(df3[['Country/Region','Date','Daily_cases']])
+  
 
 #Deaths page creation
 if page_selected=='Deaths':
@@ -86,4 +93,6 @@ if page_selected=='Deaths':
 
     st.write('The below table shows the last five days death cases ')
 
-    st.table(country_df[['Country/Region','Date','Daily_Death']].tail().reset_index())
+    df4=country_df[['Country/Region','Date','Daily_Death']].tail()
+    df4=df4.reset_index()
+    st.table(df4[['Country/Region','Date','Daily_Death']])

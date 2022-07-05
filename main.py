@@ -28,7 +28,8 @@ if page_selected=='Demo':
     date_series= df1[df1['Country/Region']=='India']['Date'].tail(1)
     for i in date_series:
         date=i
-    st.write('Total cases {} today in {} is'.format(date,selected_country))
+    bold_date=i
+    st.write('Total cases {} today in {} is'.format(bold_date,selected_country))
 
     #st.write('Total cases till today in ',selected_country,' is')
   

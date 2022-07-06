@@ -22,6 +22,7 @@ date_series= df1[df1['Country/Region']==selected_country]['Date'].tail(1)
 for i in date_series:
     date=i
 st.sidebar.write('Update on : ',date)
+st.sidebar.write("Check out the project repo: [link](https://github.com/Deepn46/Streamlit.git)")
 
 #Demo page creation
 if page_selected=='Demo':
